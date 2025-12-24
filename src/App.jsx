@@ -9,6 +9,7 @@ import Post from './pages/Post'
 import CertificationsPage from './pages/Certifications'
 import ScrollToTop from './components/ScrollToTop'
 import GlobalMusicPlayer from './components/GlobalMusicPlayer'
+import Projects from './pages/Projects'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Navbar />
       <ScrollToTop />
       <Routes>
+        <Route path="/projects" element={<Projects />} />
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />

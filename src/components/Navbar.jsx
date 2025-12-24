@@ -43,6 +43,16 @@ function Navbar() {
         </NavLink>
 
         <NavLink
+          to="/projects"
+          className={({ isActive }) =>
+            `${baseClass} ${isActive ? activeClass : inactiveClass}`
+          }
+        >
+          PROJECTS
+        </NavLink>
+
+
+        <NavLink
           to="/certifications"
           className={({ isActive }) =>
             `${baseClass} ${isActive ? activeClass : inactiveClass}`
@@ -50,6 +60,8 @@ function Navbar() {
         >
           CERTIFICATIONS
         </NavLink>
+
+        
 
       </div>
     </nav>

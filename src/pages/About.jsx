@@ -1,15 +1,33 @@
 import { Link } from 'react-router-dom'
 
+/* ===== SKILL BAR COMPONENT ===== */
+function SkillBar({ label, percent }) {
+  return (
+    <div>
+      <div className="flex justify-between text-sm font-medium text-gray-700 mb-1">
+        <span>{label}</span>
+        <span>{percent}%</span>
+      </div>
+      <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+        <div
+          className="h-2 bg-indigo-600 rounded-full transition-all duration-700"
+          style={{ width: `${percent}%` }}
+        ></div>
+      </div>
+    </div>
+  )
+}
+
 function About() {
   return (
     <section className="bg-white text-gray-700">
 
-      {/* KHỐI NỀN NHẠT – GOM HERO + CONTENT */}
-      <div className="bg-slate-50 pt-6 pb-16">
+      {/* ===== KHỐI HERO + CONTENT ===== */}
+      <div className="bg-slate-50 pt-6 pb-20">
         <div className="max-w-5xl mx-auto px-6">
 
           {/* HERO */}
-          <div className="relative overflow-hidden rounded-xl shadow-lg mb-12">
+          <div className="relative overflow-hidden rounded-xl shadow-lg mb-14">
             <img
               src={`/images/${encodeURIComponent('Anh_ca_nhan_TrongKhang (1).jpg')}`}
               alt="Nguyễn Trọng Khang"
@@ -20,7 +38,7 @@ function About() {
               }}
             />
 
-            {/* overlay nhẹ */}
+            {/* overlay */}
             <div className="absolute inset-0 bg-black/10"></div>
 
             {/* ABOUT box */}
@@ -35,55 +53,97 @@ function About() {
             </div>
           </div>
 
-          {/* CONTENT – ĐÃ CĂN ĐỀU */}
+          {/* ===== CONTENT (CĂN ĐỀU) ===== */}
           <div
             className="max-w-3xl mx-auto space-y-6
                        text-base md:text-lg leading-relaxed
                        text-justify hyphens-auto"
           >
             <p>
-              Tôi là <strong>Nguyễn Trọng Khang</strong>, sinh viên năm cuối ngành học
-              <strong> Công nghệ thông tin </strong> chuyên ngành
+              Tôi là <strong>Nguyễn Trọng Khang</strong>, sinh viên năm cuối ngành
+              <strong> Công nghệ thông tin</strong>, chuyên ngành
               <strong> Công nghệ Phần mềm</strong> tại Đại học Công Nghệ TP.HCM.
-              Tôi chọn ngành này xuất phát từ sự tò mò về cách một website hay ứng dụng
-              có thể hoạt động và phục vụ người dùng.
+              Tôi lựa chọn ngành học này xuất phát từ sự tò mò về cách một website
+              hay ứng dụng có thể hoạt động và phục vụ người dùng.
             </p>
 
             <p>
-              Trong giai đoạn đầu học tập, tôi gặp nhiều khó khăn khi tiếp cận tư duy logic
-              và các công nghệ mới. Việc làm quen với những khái niệm hoàn toàn xa lạ
-              khiến tôi học chậm và thường xuyên gặp lỗi khi thực hành.
+              Trong giai đoạn đầu học tập, tôi gặp không ít khó khăn khi tiếp cận
+              tư duy logic và các công nghệ mới. Việc làm quen với những khái niệm
+              hoàn toàn xa lạ khiến tôi học chậm và thường xuyên gặp lỗi khi thực hành.
             </p>
 
             <p>
-              Khoảnh khắc tôi tự xây dựng được một giao diện hoàn chỉnh,
-              các chức năng hoạt động đúng và được đánh giá tốt đã giúp tôi nhận ra
-              mình phù hợp với lĩnh vực này và tiếp tục theo đuổi con đường lập trình.
+              Khoảnh khắc tôi tự xây dựng được một giao diện hoàn chỉnh, các chức năng
+              hoạt động đúng và được đánh giá tốt đã giúp tôi nhận ra bản thân phù hợp
+              với lĩnh vực này và tiếp tục theo đuổi con đường lập trình.
             </p>
 
             <p>
-              Hiện tại, tôi định hướng theo mảng <strong>Kiểm thử phần mềm</strong>
-              và từng bước tìm hiểu <strong>Backend</strong>, với mục tiêu hiểu rõ hơn
-              cách một hệ thống phần mềm được xây dựng, vận hành và kiểm soát chất lượng
-              trong thực tế. Đối với tôi, việc nắm vững nền tảng lập trình và tư duy hệ thống
-              là yếu tố quan trọng trước khi đi sâu vào bất kỳ hướng chuyên môn nào.
+              Hiện tại, tôi định hướng phát triển theo mảng <strong>Backend</strong>
+              và <strong>Kiểm thử phần mềm</strong>, với mong muốn hiểu rõ hơn cách
+              một hệ thống phần mềm được xây dựng, vận hành và kiểm soát chất lượng
+              trong thực tế.
             </p>
 
             <p className="italic text-gray-600">
-              Xuất phát từ định hướng đó, blog này được xây dựng như một nhật ký học tập
-              cho học phần <strong>Lập trình mạng</strong>, nơi tôi ghi lại các kiến thức,
+              Blog này được xây dựng như một nhật ký học tập cho học phần
+              <strong> Lập trình mạng</strong>, nơi tôi ghi lại các kiến thức,
               ví dụ thực hành và những vấn đề gặp phải trong quá trình học
-              <strong> Java</strong> và <strong>JavaScript</strong>. Thông qua việc
-              tổng hợp và trình bày lại nội dung học, tôi vừa củng cố kiến thức cho bản thân,
-              vừa rèn luyện khả năng phân tích, hệ thống hóa và diễn đạt các khái niệm
-              kỹ thuật một cách rõ ràng.
+              <strong> Java</strong> và <strong>JavaScript</strong>.
             </p>
           </div>
         </div>
       </div>
 
-      {/* ACTION */}
-      <div className="flex justify-center gap-4 py-16">
+      {/* ===== SKILLS ===== */}
+      <div className="max-w-5xl mx-auto px-6 mt-24">
+        <h2 className="text-3xl font-bold text-gray-900 text-center mb-14">
+          Kỹ năng cá nhân
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+          {/* FRONTEND */}
+          <div className="bg-white rounded-xl shadow p-6">
+            <h3 className="text-xl font-semibold text-indigo-600 mb-6">
+              Frontend
+            </h3>
+            <div className="space-y-4">
+              <SkillBar label="HTML / CSS" percent={70} />
+              <SkillBar label="Tailwind CSS" percent={70} />
+              <SkillBar label="React" percent={70} />
+            </div>
+          </div>
+
+          {/* BACKEND */}
+          <div className="bg-white rounded-xl shadow p-6">
+            <h3 className="text-xl font-semibold text-indigo-600 mb-6">
+              Backend & Database
+            </h3>
+            <div className="space-y-4">
+              <SkillBar label="Node.js" percent={85} />
+              <SkillBar label="MongoDB" percent={70} />
+              <SkillBar label="MySQL" percent={70} />
+            </div>
+          </div>
+
+          {/* OTHER */}
+          <div className="bg-white rounded-xl shadow p-6 md:col-span-2">
+            <h3 className="text-xl font-semibold text-indigo-600 mb-6">
+              Ngôn ngữ & Kỹ năng khác
+            </h3>
+            <div className="space-y-4 max-w-md">
+              <SkillBar label="C++" percent={40} />
+              <SkillBar label="Git / GitHub" percent={70} />
+              <SkillBar label="Tư duy logic & giải quyết vấn đề" percent={75} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ===== ACTION ===== */}
+      <div className="flex justify-center gap-4 py-20">
         <Link
           to="/blog"
           className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded
