@@ -35,15 +35,15 @@ function Projects() {
   ]
 
   return (
-    <section className="bg-slate-50 min-h-screen py-20">
+    <section className="min-h-screen py-20 bg-slate-50 dark:bg-slate-950 text-gray-700 dark:text-gray-200 transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* HEADER */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
+          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
             Dự án cá nhân
           </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Các dự án tiêu biểu trong quá trình học tập và thực hành phát triển
             ứng dụng web và mobile.
           </p>
@@ -54,7 +54,13 @@ function Projects() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden"
+              className="
+                bg-white dark:bg-slate-900
+                rounded-xl shadow
+                hover:shadow-lg transition
+                overflow-hidden
+                border border-gray-200 dark:border-slate-700
+              "
             >
               {/* IMAGE */}
               <img
@@ -65,11 +71,11 @@ function Projects() {
 
               {/* CONTENT */}
               <div className="p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-3">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
                   {project.title}
                 </h2>
 
-                <p className="text-gray-600 mb-4 leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
                   {project.description}
                 </p>
 
@@ -78,15 +84,18 @@ function Projects() {
                   {project.tech.map((item, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-indigo-50 text-indigo-600
-                                 rounded-full text-xs font-medium"
+                      className="
+                        px-3 py-1 rounded-full text-xs font-medium
+                        bg-indigo-50 text-indigo-600
+                        dark:bg-indigo-500/15 dark:text-indigo-400
+                      "
                     >
                       {item}
                     </span>
                   ))}
                 </div>
 
-                <p className="text-sm text-gray-500 mb-4">
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
                   Vai trò: <strong>{project.role}</strong>
                 </p>
 
@@ -97,7 +106,7 @@ function Projects() {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-indigo-600 hover:underline"
+                      className="text-indigo-600 dark:text-indigo-400 hover:underline"
                     >
                       GitHub
                     </a>
@@ -107,7 +116,7 @@ function Projects() {
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-indigo-600 hover:underline"
+                      className="text-indigo-600 dark:text-indigo-400 hover:underline"
                     >
                       Demo
                     </a>
@@ -122,8 +131,13 @@ function Projects() {
         <div className="flex justify-center mt-20">
           <Link
             to="/"
-            className="px-6 py-3 bg-gray-100 text-gray-800 font-semibold rounded
-                       hover:bg-gray-200 transition"
+            className="
+              px-6 py-3 font-semibold rounded
+              bg-gray-100 dark:bg-slate-800
+              text-gray-800 dark:text-gray-200
+              hover:bg-gray-200 dark:hover:bg-slate-700
+              transition
+            "
           >
             Về Home
           </Link>

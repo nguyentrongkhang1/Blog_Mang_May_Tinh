@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom'
 function SkillBar({ label, percent }) {
   return (
     <div>
-      <div className="flex justify-between text-sm font-medium text-gray-700 mb-1">
+      <div className="flex justify-between text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
         <span>{label}</span>
         <span>{percent}%</span>
       </div>
-      <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+
+      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
         <div
           className="h-2 bg-indigo-600 rounded-full transition-all duration-700"
           style={{ width: `${percent}%` }}
@@ -20,10 +21,10 @@ function SkillBar({ label, percent }) {
 
 function About() {
   return (
-    <section className="bg-white text-gray-700">
+    <section className="bg-white dark:bg-slate-900 text-gray-700 dark:text-gray-200 transition-colors duration-300">
 
       {/* ===== HERO ===== */}
-      <div className="bg-slate-50 pt-6 pb-32">
+      <div className="bg-slate-50 dark:bg-slate-800 pt-6 pb-32">
         <div className="max-w-5xl mx-auto px-6">
 
           <div className="relative overflow-hidden rounded-xl shadow-lg">
@@ -34,23 +35,25 @@ function About() {
             />
             <div className="absolute inset-0 bg-black/10" />
 
+            {/* ABOUT LABEL */}
             <div
               className="
                 absolute left-4 sm:left-6 md:left-10
                 top-1/2 -translate-y-1/2
-                bg-white/80 backdrop-blur
+                bg-white/80 dark:bg-slate-900/80
+                backdrop-blur
                 px-6 py-4 shadow-lg rounded
               "
             >
-              <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white">
                 ABOUT
               </h1>
             </div>
           </div>
 
-          {/* ===== CONTENT CARD (KHÔNG absolute) ===== */}
+          {/* ===== CONTENT CARD ===== */}
           <div className="max-w-3xl mx-auto -mt-16 relative z-10">
-            <div className="bg-white/95 backdrop-blur rounded-2xl shadow-xl p-6 md:p-8 space-y-5 text-base md:text-lg text-justify leading-relaxed">
+            <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur rounded-2xl shadow-xl p-6 md:p-8 space-y-5 text-base md:text-lg text-justify leading-relaxed">
 
               <p>
                 Tôi là <strong>Nguyễn Trọng Khang</strong>, sinh viên năm cuối ngành
@@ -79,7 +82,7 @@ function About() {
                 trong thực tế.
               </p>
 
-              <p className="italic text-gray-600">
+              <p className="italic text-gray-600 dark:text-gray-400">
                 Blog này được xây dựng như một nhật ký học tập cho học phần
                 <strong> Lập trình mạng</strong>, nơi tôi ghi lại các kiến thức,
                 ví dụ thực hành và những vấn đề gặp phải trong quá trình học
@@ -92,12 +95,13 @@ function About() {
 
       {/* ===== SKILLS ===== */}
       <div className="max-w-5xl mx-auto px-6 mt-24">
-        <h2 className="text-3xl font-bold text-center mb-14">
+        <h2 className="text-3xl font-bold text-center mb-14 text-gray-900 dark:text-white">
           Kỹ năng cá nhân
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div className="bg-white rounded-xl shadow p-6">
+
+          <div className="bg-white dark:bg-slate-800 rounded-xl shadow p-6">
             <h3 className="text-xl font-semibold text-indigo-600 mb-6">
               Frontend
             </h3>
@@ -108,7 +112,7 @@ function About() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow p-6">
+          <div className="bg-white dark:bg-slate-800 rounded-xl shadow p-6">
             <h3 className="text-xl font-semibold text-indigo-600 mb-6">
               Backend & Database
             </h3>
@@ -119,7 +123,7 @@ function About() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow p-6 md:col-span-2">
+          <div className="bg-white dark:bg-slate-800 rounded-xl shadow p-6 md:col-span-2">
             <h3 className="text-xl font-semibold text-indigo-600 mb-6">
               Ngôn ngữ & Kỹ năng khác
             </h3>
@@ -134,10 +138,16 @@ function About() {
 
       {/* ===== ACTION ===== */}
       <div className="flex justify-center gap-4 py-20">
-        <Link to="/blog" className="px-6 py-3 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+        <Link
+          to="/blog"
+          className="px-6 py-3 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
+        >
           Xem Blog
         </Link>
-        <Link to="/" className="px-6 py-3 bg-gray-100 rounded hover:bg-gray-200">
+        <Link
+          to="/"
+          className="px-6 py-3 bg-gray-100 dark:bg-slate-700 dark:text-gray-200 rounded hover:bg-gray-200 dark:hover:bg-slate-600 transition"
+        >
           Về Home
         </Link>
       </div>
