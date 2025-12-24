@@ -12,8 +12,13 @@ function Navbar() {
 
   return (
     <nav className="w-full bg-white border-b">
-      <div className="max-w-screen-2xl mx-auto px-8 h-16
-                      flex items-center justify-center gap-10">
+      <div className="
+                      flex items-center justify-center
+                      gap-4 sm:gap-6 md:gap-10
+                      text-sm sm:text-base
+  flex-wrap
+">
+
 
         <NavLink
           to="/"
@@ -21,7 +26,7 @@ function Navbar() {
             `${baseClass} ${isActive ? activeClass : inactiveClass}`
           }
         >
-          HOME
+          Home
         </NavLink>
 
         <NavLink
@@ -30,7 +35,7 @@ function Navbar() {
             `${baseClass} ${isActive ? activeClass : inactiveClass}`
           }
         >
-          ABOUT
+          About
         </NavLink>
 
         <NavLink
@@ -39,7 +44,7 @@ function Navbar() {
             `${baseClass} ${isActive ? activeClass : inactiveClass}`
           }
         >
-          BLOG
+          Blog
         </NavLink>
 
         <NavLink
@@ -48,7 +53,7 @@ function Navbar() {
             `${baseClass} ${isActive ? activeClass : inactiveClass}`
           }
         >
-          PROJECTS
+          Projects
         </NavLink>
 
 
@@ -58,7 +63,8 @@ function Navbar() {
             `${baseClass} ${isActive ? activeClass : inactiveClass}`
           }
         >
-          CERTIFICATIONS
+          Certifications
+          
         </NavLink>
 
         

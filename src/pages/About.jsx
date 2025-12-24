@@ -47,18 +47,26 @@ function About() {
                          bg-white/80 backdrop-blur
                          px-8 py-5 shadow-lg rounded"
             >
-              <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900">
-                ABOUT
+              <h1 className="
+                  text-3xl sm:text-4xl md:text-6xl
+                   font-extrabold tracking-tight
+                                                 ">
+                           ABOUT
               </h1>
+
             </div>
           </div>
 
           {/* ===== CONTENT (CĂN ĐỀU) ===== */}
-          <div
-            className="max-w-3xl mx-auto space-y-6
-                       text-base md:text-lg leading-relaxed
-                       text-justify hyphens-auto"
-          >
+          <div className="
+                           absolute left-4 sm:left-6 md:left-10
+                           top-[65%] sm:top-1/2
+                           -translate-y-1/2
+                           bg-white/80 backdrop-blur
+                           px-6 py-4 sm:px-8 sm:py-5
+                           shadow-lg rounded
+          ">
+
             <p>
               Tôi là <strong>Nguyễn Trọng Khang</strong>, sinh viên năm cuối ngành
               <strong> Công nghệ thông tin</strong>, chuyên ngành
