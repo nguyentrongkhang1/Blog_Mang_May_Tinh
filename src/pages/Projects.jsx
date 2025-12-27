@@ -18,19 +18,31 @@ function Projects() {
         'Google Sheets'
       ],
       role: 'Fullstack Developer',
-      github: '',
-      demo: ''
+      github: [
+        {
+          label: 'Frontend',
+          url: 'https://github.com/nguyentrongkhang1/Do-an-chuyen-nganh'
+        },
+        {
+          label: 'Backend',
+          url: 'https://github.com/vanquy0911/BE-HOTEL'
+        }
+      ]
     },
     {
       title: 'Ứng dụng đọc Kinh Thánh',
       image:
         'https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=1200&q=80',
       description:
-        'Ứng dụng di động hỗ trợ đọc Kinh Thánh, tìm kiếm nội dung và quản lý dữ liệu người dùng. Giao diện đơn giản, dễ sử dụng, hướng đến trải nghiệm đọc tập trung.',
-      tech: ['Flutter', 'Dart', 'MongoDB'],
+        'Ứng dụng di động hỗ trợ đọc Kinh Thánh theo ngày, tìm kiếm nội dung và quản lý dữ liệu. Giao diện đơn giản, tập trung vào trải nghiệm đọc.',
+      tech: ['Flutter', 'Dart'],
       role: 'Mobile App Developer',
-      github: '',
-      demo: ''
+      github: [
+        {
+          label: 'Source code',
+          url: 'https://github.com/NerdKandev/Sang03_Nhom01_AppTimBaiDocTheoNgay'
+        }
+      ]
     }
   ]
 
@@ -99,28 +111,31 @@ function Projects() {
                   Vai trò: <strong>{project.role}</strong>
                 </p>
 
-                {/* LINKS */}
-                <div className="flex gap-4 text-sm">
-                  {project.github && (
+                {/* GITHUB LINKS */}
+                <div className="flex gap-4 items-center">
+                  {project.github.map((repo, i) => (
                     <a
-                      href={project.github}
+                      key={i}
+                      href={repo.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-indigo-600 dark:text-indigo-400 hover:underline"
+                      className="
+                        inline-flex items-center gap-2
+                        text-indigo-600 dark:text-indigo-400
+                        hover:underline
+                      "
                     >
-                      GitHub
+                      {/* GitHub Icon */}
+                      <svg
+                        className="w-5 h-5"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.1 3.29 9.42 7.86 10.95.57.1.78-.25.78-.55v-1.93c-3.2.7-3.87-1.54-3.87-1.54-.52-1.32-1.28-1.67-1.28-1.67-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.72-1.55-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.45.11-3.02 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.18-1.18 3.18-1.18.62 1.57.23 2.73.11 3.02.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.2.66.79.55A11.53 11.53 0 0 0 23.5 12.03C23.5 5.74 18.27.5 12 .5z" />
+                      </svg>
+                      <span className="text-sm">{repo.label}</span>
                     </a>
-                  )}
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-indigo-600 dark:text-indigo-400 hover:underline"
-                    >
-                      Demo
-                    </a>
-                  )}
+                  ))}
                 </div>
               </div>
             </div>
