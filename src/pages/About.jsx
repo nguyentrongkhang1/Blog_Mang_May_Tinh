@@ -135,6 +135,30 @@ function About() {
         </div>
       </div>
 
+      {/* ===== KINH NGHIEM LAM THEM ===== */}
+      <div className="max-w-5xl mx-auto px-6 mt-8">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow p-6 mb-8">
+          <h3 className="text-xl font-semibold text-indigo-600 mb-3">Kinh nghiệm làm thêm</h3>
+          <ul className="list-disc pl-5 text-sm space-y-1 text-gray-700 dark:text-gray-300">
+            <li>F&B — phục vụ & quản lý ca: rèn kỹ năng giao tiếp với khách, xử lý tình huống và làm việc nhóm hiệu quả.</li>
+            <li>Quản lý thời gian và ưu tiên công việc, giữ hiệu suất cao khi ca đông hoặc dưới áp lực.</li>
+            <li>Áp dụng vào lập trình: tổ chức công việc, phối hợp team, xử lý sự cố nhanh khi phát triển feature.</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* ===== SO THICH & THE MANG (SỞ THÍCH & THẾ MẠNH) ===== */}
+      <div className="max-w-5xl mx-auto px-6 mt-4">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow p-6 mb-8">
+          <h3 className="text-xl font-semibold text-indigo-600 mb-3">Sở thích & Thế mạnh</h3>
+          <div className="text-sm text-gray-700 dark:text-gray-300 space-y-2">
+            <p>• Sở thích: thích du lịch, ngắm cảnh — giúp tôi mở rộng tầm nhìn và tạo nguồn cảm hứng khi làm việc.</p>
+            <p>• Thế mạnh cá nhân: dễ dàng hòa nhập, mang lại không khí vui vẻ cho đồng đội và thích nghi nhanh trong môi trường mới.</p>
+            <p>• Thể thao: chơi cầu lông và bóng rổ — rèn kỹ năng phối hợp đội, tinh thần cạnh tranh lành mạnh và sức bền khi làm việc dưới áp lực.</p>
+          </div>
+        </div>
+      </div>
+
       {/* ===== ACTION ===== */}
       <div className="flex justify-center gap-4 py-20">
         <Link

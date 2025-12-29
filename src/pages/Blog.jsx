@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom'
 import { blogPosts } from '../utils/loadMarkdown'
+import useFavoriteBlog from '../utils/useFavoriteBlog'
+import { useState } from 'react'
 
 function Blog() {
 
-  /* ================= ICONS ================= */
+  const [favorite, setFavorite] = useFavoriteBlog()
+  const [page, setPage] = useState(1)
+  const itemsPerPage = 3
+
   const blogIcons = [
     <path key="1" d="M22 12h-4l-3 9L9 3l-3 9H2" />,
     <path key="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />,
@@ -16,119 +21,126 @@ function Blog() {
     <path key="9" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />,
   ]
 
-  /* ================= DATE FORMAT ================= */
   const formatDateVN = (dateStr) => {
-    if (!dateStr) return ''
-
+    // Luôn hiển thị vào tháng 12 (tháng index 11) năm 2025.
+    // Nếu dateStr có dạng YYYY-MM-DD thì giữ ngày từ đó, ngược lại dùng ngày 1.
+    const defaultDay = 1
+    if (!dateStr) return new Date(2025, 11, defaultDay).toLocaleDateString('vi-VN')
     const full = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr)
     if (full) {
-      const [, y, m, d] = full
-      return new Date(y, m - 1, d).toLocaleDateString('vi-VN')
+      const day = Number(full[3]) || defaultDay
+      return new Date(2025, 11, day).toLocaleDateString('vi-VN')
     }
+    return new Date(2025, 11, defaultDay).toLocaleDateString('vi-VN')
+  }
 
-    const short = /^(\d{4})-(\d{2})$/.exec(dateStr)
-    if (short) {
-      const [, y, m] = short
-      return new Date(y, m - 1, 1).toLocaleDateString('vi-VN', {
-        month: '2-digit',
-        year: 'numeric',
-      })
+  const favoritePost = blogPosts.find(p => p.slug === favorite)
+
+  // Pagination
+  const totalPages = Math.max(1, Math.ceil(blogPosts.length / itemsPerPage))
+  const startIdx = (page - 1) * itemsPerPage
+  const endIdx = startIdx + itemsPerPage
+  const pagePosts = blogPosts.slice(startIdx, endIdx)
+
+  const toggleFavorite = (e, slug) => {
+    e.preventDefault()
+    if (favorite === slug) {
+      setFavorite(null)
+      localStorage.removeItem('favorite_blog')
+    } else {
+      setFavorite(slug)
     }
+  }
 
-    return dateStr
+  const goToPage = (p) => {
+    if (p < 1 || p > totalPages) return
+    setPage(p)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
-    <section className="min-h-screen bg-gray-50 dark:bg-slate-900 text-gray-600 dark:text-gray-300 transition-colors duration-300">
+    <section className="min-h-screen bg-gray-50 dark:bg-slate-900 text-gray-600 dark:text-gray-300">
       <div className="container px-5 pt-16 pb-24 mx-auto">
 
-        {/* ================= HEADER ================= */}
-        <div className="flex flex-col items-center text-center mb-20">
-          <h1 className="sm:text-3xl text-2xl font-semibold mb-2 text-gray-900 dark:text-white">
-            Blog Học Tập – Lập trình mạng
+        <div className="flex flex-col items-center text-center mb-16">
+          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-white">
+            Blog Học Tập – Lập Trình Mạng
           </h1>
-
-          <p className="lg:w-1/2 w-full leading-relaxed text-gray-500 dark:text-gray-400">
-            Blog học tập phục vụ học phần <strong>Lập trình mạng</strong>,
-            ghi lại kiến thức và ví dụ thực hành về <strong>Java</strong> và
-            <strong> JavaScript</strong>.
-          </p>
-
-          <p className="text-sm text-gray-400 mt-2">
-            Các bài viết được sắp xếp theo tiến trình học từ cơ bản đến nâng cao
-          </p>
         </div>
 
-        {/* ================= BLOG GRID ================= */}
+        {favoritePost && (
+          <div className="mb-12 p-6 bg-indigo-50 dark:bg-slate-800 border-l-4 border-indigo-500 rounded">
+            <p className="text-sm text-indigo-600 font-semibold">⭐ Blog yêu thích</p>
+            <Link to={`/blog/${favoritePost.slug}`} className="text-lg font-bold hover:text-indigo-600">
+              {favoritePost.title}
+            </Link>
+          </div>
+        )}
+
         <div className="flex flex-wrap -m-4">
-          {blogPosts.map((post, index) => (
+          {pagePosts.map((post, index) => (
             <div key={post.slug} className="xl:w-1/3 md:w-1/2 p-4">
               <Link to={`/blog/${post.slug}`}>
-                <div
-                  className="
-                    h-full p-6 rounded-xl border
-                    bg-white dark:bg-slate-800
-                    border-gray-200 dark:border-slate-700
-                    hover:shadow-lg hover:border-indigo-400
-                    transition-all duration-300
-                    group hover:-translate-y-1
-                  "
-                >
+                <div className="h-full p-6 bg-white dark:bg-slate-800 border rounded-xl hover:shadow-lg transition">
 
-                  {/* ICON + DATE */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div
-                      className="
-                        w-10 h-10 inline-flex items-center justify-center
-                        rounded-full bg-indigo-100 text-indigo-500
-                        dark:bg-indigo-500/20 dark:text-indigo-400
-                        group-hover:bg-indigo-500 group-hover:text-white
-                        transition-colors
-                      "
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        className="w-6 h-6"
-                        viewBox="0 0 24 24"
-                      >
-                        {blogIcons[index]}
-                      </svg>
-                    </div>
-
-                    <span className="text-xs px-2 py-1 rounded bg-gray-100 dark:bg-slate-700 text-gray-500 dark:text-gray-300">
-                      {formatDateVN(post.date)}
-                    </span>
+                  <div className="flex justify-between mb-4">
+                    <svg className="w-6 h-6 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      {blogIcons[(startIdx + index) % blogIcons.length]}
+                    </svg>
+                    <span className="text-xs">{formatDateVN(post.date)}</span>
                   </div>
 
-                  {/* TITLE */}
-                  <h2 className="text-lg font-medium mb-2 text-gray-900 dark:text-white group-hover:text-indigo-500 transition-colors">
-                    <span className="text-indigo-500 font-semibold mr-1">
-                      Bài {index + 1}.
-                    </span>
-                    {post.title}
-                  </h2>
+                  <h2 className="text-lg font-semibold mb-2">{post.title}</h2>
+                  <p className="text-sm mb-4 line-clamp-3">{post.excerpt}</p>
 
-                  {/* EXCERPT */}
-                  <p className="text-base mb-4 line-clamp-3 text-gray-500 dark:text-gray-400">
-                    {post.excerpt}
-                  </p>
-
-                  {/* FOOTER */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-indigo-600 dark:text-indigo-400 font-medium">
-                      Đọc thêm →
-                    </span>
-                    <span className="text-xs text-gray-400">
-                      📖 ~5 phút
-                    </span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-indigo-600">Đọc thêm →</span>
+                    <button
+                      onClick={(e) => toggleFavorite(e, post.slug)}
+                      className={`text-xl ${favorite === post.slug ? 'text-red-500' : 'text-gray-400'}`}
+                      aria-label={favorite === post.slug ? 'Bỏ yêu thích' : 'Yêu thích'}
+                    >
+                      {favorite === post.slug ? '❤️' : '🤍'}
+                    </button>
                   </div>
 
                 </div>
               </Link>
             </div>
           ))}
+        </div>
+
+        {/* Pagination controls */}
+        <div className="flex justify-center items-center mt-8 space-x-3">
+          <button
+            onClick={() => goToPage(page - 1)}
+            disabled={page === 1}
+            className="px-3 py-1 rounded-md bg-white dark:bg-slate-800 border disabled:opacity-40"
+          >
+            Prev
+          </button>
+
+          {[...Array(totalPages)].map((_, i) => {
+            const p = i + 1
+            return (
+              <button
+                key={p}
+                onClick={() => goToPage(p)}
+                className={`px-3 py-1 rounded-md border ${p === page ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-slate-800'}`}
+                aria-current={p === page ? 'page' : undefined}
+              >
+                {p}
+              </button>
+            )
+          })}
+
+          <button
+            onClick={() => goToPage(page + 1)}
+            disabled={page === totalPages}
+            className="px-3 py-1 rounded-md bg-white dark:bg-slate-800 border disabled:opacity-40"
+          >
+            Next
+          </button>
         </div>
 
       </div>
